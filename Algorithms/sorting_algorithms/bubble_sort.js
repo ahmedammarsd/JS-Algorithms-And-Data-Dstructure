@@ -18,6 +18,7 @@ function bubbleSort(array) {
 }
 
 //console.log(bubbleSort([-6, 20, 8, -2, 4]));//
+console.time();
 console.log(bubbleSort([4, 3, 2, 1]));
-
+console.timeEnd();
 // Big O = O(n^2)
