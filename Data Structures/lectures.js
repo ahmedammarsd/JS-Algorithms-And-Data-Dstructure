@@ -4,7 +4,14 @@
 
       + A data structure is a collection of dta values ,
         the relationships among them, and the functions or operations that can be applied to that data
+
+
+      - DOM: Tree data structure
+      - Browser back and forward: Stack data structure
+      - OS job scheduling: Queue data structure  
     
+      # Built in data structures : Arrays , Objects , Sets and Maps.
+      # Custom data structures: Stacks , Queues , Circular Queues , Linked lists , Hash tables , Trees and Graphs
     */
 //1 ============== Intorductions  =======================
 
