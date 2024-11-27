@@ -44,6 +44,7 @@ class LinkedList {
     return this.size;
   }
 
+  // Prepend: Insert a new node at the beginning of the linked list
   prepend(value) {
     const node = new Node(value);
     if (this.isEmpty()) {
@@ -51,6 +52,24 @@ class LinkedList {
     } else {
       node.next = this.head;
       this.head = node;
+    }
+    this.size++;
+  }
+
+  // Append: Insert a new node at the end of the linked List
+  append(value) {
+    const node = new Node(value);
+    if (this.isEmpty()) {
+      this.head = node;
+    } else {
+      let prev = this.head;
+
+      console.log("The prev:", prev.next);
+      // it's loop when the prev.next == null it's will stop
+      while (prev.next !== null) {
+        prev = this.next;
+      }
+      prev.next = node;
     }
     this.size++;
   }
@@ -73,8 +92,15 @@ class LinkedList {
 const list = new LinkedList();
 console.log(list.isEmpty());
 console.log(list.getSize());
+
+list.append(40);
+list.append(5);
+list.append(7);
+list.append(50);
 list.prepend(10);
 list.prepend(20);
+list.prepend(30);
+
 list.print();
 console.log(list.isEmpty());
 console.log(list.getSize());
