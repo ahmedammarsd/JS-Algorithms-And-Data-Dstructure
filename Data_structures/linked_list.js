@@ -44,6 +44,7 @@ class LinkedList {
     return this.size;
   }
 
+  // O(1)
   // Prepend: Insert a new node at the beginning of the linked list
   prepend(value) {
     const node = new Node(value);
@@ -56,22 +57,163 @@ class LinkedList {
     this.size++;
   }
 
+  // O(n)
   // Append: Insert a new node at the end of the linked List
   append(value) {
     const node = new Node(value);
     if (this.isEmpty()) {
       this.head = node;
+      this.size++;
+    } else {
+      // i fix it by get the size and insert to last
+      let size = this.getSize();
+      this.insert(value, size);
+
+      // =======   i stoped it because problem in while lop when i write
+      // prev.next to check it or stoped when == null and not working on in while loop =========
+      // let prev = this.head;
+      // let next = prev.next;
+
+      // console.log("The prev:", prev.next);
+      // // bug in prev.next , i didn't know for now
+      // // it's loop when the prev.next == null it's will stop
+      // while (next) {
+      //   prev = this.next;
+      // }
+      // prev.next = node;
+    }
+    // I add to top because not icrease more - i used the insert function and it have increase of size inside it
+    //this.size++;
+  }
+
+  // Insert
+  insert(value, index) {
+    if (index < 0 || index > this.size) {
+      return;
+    }
+    if (index == 0) {
+      // Add To Head
+      this.prepend(value);
+    } else {
+      const node = new Node(value);
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      node.next = prev.next;
+      prev.next = node;
+      this.size++;
+    }
+  }
+
+  // Remove by index
+  // O(n)
+  remove(index) {
+    if (index < 0 || index >= this.size) {
+      return;
+    }
+    let removedNode;
+    if (index == 0) {
+      removedNode = this.head;
+      this.head = this.head.next;
+    } else {
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      // === My long soluation ==
+      // let accNode = prev;
+      // accNode = accNode.next;
+      // accNode = accNode.next;
+      // prev.next = accNode;
+      // Another shor soluation
+      removedNode = prev.next;
+      prev.next = removedNode.next;
+    }
+
+    this.size--;
+    return removedNode;
+  }
+
+  // Remove Value
+  // O(n)
+  removeValue(value) {
+    if (this.isEmpty()) {
+      return null;
+    }
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.size--;
+      return value;
     } else {
       let prev = this.head;
 
-      console.log("The prev:", prev.next);
-      // it's loop when the prev.next == null it's will stop
-      while (prev.next !== null) {
-        prev = this.next;
+      // {  My Long Soluation
+      //   for (let i = 0; i < this.size - 1; i++) {
+      //     // console.log("start loop remove value ===", i);
+      //     // console.log(prev.next.value, " ======== ", value);
+      //     if (prev.next?.value === value) {
+      //       break;
+      //     }
+      //     prev = prev.next;
+      //   }
+      //   let removedNode = prev.next;
+      //   if (removedNode === null) {
+      //     console.log("=== The Number not Found To Delete ===");
+      //     return;
+      //   }
+      //   prev.next = removedNode?.next;
+      // }
+
+      // it loop working into find value or prev.next = null it will stop
+      while (prev.next && prev.next.value !== value) {
+        prev = prev.next;
       }
-      prev.next = node;
+      if (prev.next) {
+        let removeNode = prev.next;
+        prev.next = removeNode.next;
+        this.size--;
+        return value;
+      }
     }
-    this.size++;
+  }
+
+  // Search
+  search(value) {
+    if (this.size === 0) {
+      return -1;
+    }
+    let curr = this.head;
+
+    // 3== Third Solution == the instructor solution ==
+    // let i = 0
+    // while(curr) {
+    //   if (curr.value === value){
+    //     return i;
+    //   }
+    //   curr = curr.next
+    //   i++
+    // }
+
+    //1== first solution if found return The Node ==
+    // i can use a (let i) like a counter to trace the index number === - i added in Sol 3
+    // while (curr && curr.value !== value) {
+    //   curr = curr.next;
+    // }
+    // if (curr) {
+    //   return curr;
+    // } else {
+    //   return -1;
+    // }
+
+    //2=== Second solution if founded return the index and also Node ==
+    for (let i = 0; i <= this.size - 1; i++) {
+      if (curr.value === value) {
+        return i;
+      }
+      curr = curr.next;
+    }
+    return -1;
   }
 
   print() {
@@ -93,13 +235,17 @@ const list = new LinkedList();
 console.log(list.isEmpty());
 console.log(list.getSize());
 
-list.append(40);
-list.append(5);
-list.append(7);
-list.append(50);
 list.prepend(10);
 list.prepend(20);
-list.prepend(30);
+list.insert(15, 1);
+list.insert(16, 2);
+list.insert(17, 4);
+list.insert(1, 0);
+list.append(30);
+list.append(35);
+//console.log(list.remove(0));
+list.removeValue(30);
+console.log("Search Value : ", list.search(30));
 
 list.print();
 console.log(list.isEmpty());
