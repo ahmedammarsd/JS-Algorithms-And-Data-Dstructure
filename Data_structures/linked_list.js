@@ -216,6 +216,25 @@ class LinkedList {
     return -1;
   }
 
+  reverse() {
+    let prev = null;
+    let curr = this.head;
+    while (curr) {
+      console.log("The curr", curr);
+      let next = curr.next; // 2
+      console.log("The curr next", next);
+      curr.next = prev; // 1
+      console.log("The curr next2", curr.next, " = ", prev);
+      prev = curr;
+      console.log(prev, " = ", curr);
+      curr = next;
+      console.log(curr, " = ", next);
+      console.log("=====================================================");
+      console.log("=====================================================");
+    }
+    this.head = prev;
+  }
+
   print() {
     if (this.isEmpty()) {
       console.log("List is Empty");
@@ -246,7 +265,9 @@ list.append(35);
 //console.log(list.remove(0));
 list.removeValue(30);
 console.log("Search Value : ", list.search(30));
-
+list.print();
+console.log("reverse down ==");
+list.reverse();
 list.print();
 console.log(list.isEmpty());
 console.log(list.getSize());
