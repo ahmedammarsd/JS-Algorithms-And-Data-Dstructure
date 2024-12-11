@@ -78,6 +78,49 @@ class Graph {
     }
 
     this.adjacencyList[vertex1].add(vertex2);
+    this.adjacencyList[vertex2].add(vertex1);
+  }
+
+  removeVertex(vertex) {
+    if (!this.adjacencyList[vertex]) {
+      return;
+    }
+
+    // Romove from another edgs
+    for (let adjacencyVertex of this.adjacencyList[vertex]) {
+      this.removeEdge(vertex, adjacencyVertex);
+    }
+    // Romove From main object
+    delete this.adjacencyList[vertex];
+  }
+
+  display() {
+    for (let vertex in this.adjacencyList) {
+      console.log(vertex + " -> " + [...this.adjacencyList[vertex]]);
+    }
+  }
+
+  hasEdge(vertex1, vertex2) {
+    // let check1 = this.adjacencyList[vertex1].has(vertex2);
+    // let check2 = this.adjacencyList[vertex2].has(vertex1);
+    // if (check1 && check2) {
+    //   return true;
+    // }
+    // return false;
+
+    return (
+      this.adjacencyList[vertex1].has(vertex2) &&
+      this.adjacencyList[vertex2].has(vertex1)
+    );
+  }
+
+  removeEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex1].delete(vertex2);
+      this.adjacencyList[vertex2].delete(vertex1);
+      return;
+    }
+    console.log("Not Found the Vertex");
   }
 }
 
@@ -87,5 +130,8 @@ graph.addVertex("B");
 graph.addVertex("C");
 graph.addEdge("A", "B");
 graph.addEdge("B", "C");
-
-console.log(graph.adjacencyList);
+graph.display();
+console.log(graph.hasEdge("A", "C"));
+graph.removeEdge("A", "f");
+graph.removeVertex("C");
+graph.display();
