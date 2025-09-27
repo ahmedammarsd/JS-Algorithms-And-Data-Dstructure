@@ -1,0 +1,39 @@
+
+         #=====  Gang of four (GoF) Design Patterns ======#
+Design Patterns
+    - It solving for itration problem with most software.
+    - It is a way of write code for specific parts for any software - common between programmers
+
+    - Communication between software engineers using common vocabulary 
+    - Avoid reinventing the wheel.
+    - Leverage the power of object oriented design.
+
+Design Patterns Types : 
+    1- Creational Design Patterns
+        1- Singleton
+        2- Factory 
+        3- Abstract 
+        4- Builder
+        5- Prototype
+    2- Structural Design Patterns : The way of the Structure that building for the software
+        1- Proxy
+        2- Decorator
+        3- Adapter
+        4- Bridge
+        5- Composite
+        6- Facade
+        7- flyweight
+    3- Behaviour Design Patterns : are design patters that identify common communication patterns among objects. by doing so,
+        these patters increase flexibility in carrying out communication
+        1- Template
+        2- Observer
+        3- Command
+        4- State
+        5- Chain of Responsibility 
+        6- Interpreter
+        7- Iteretor
+        8- Mediator
+        9- Strategy
+        10- Visitor
+         
+    
